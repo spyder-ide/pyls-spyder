@@ -1,2 +1,68 @@
 # pyls-spyder
-Spyder extensions to the python language server (pyls)
+
+[![Project License - MIT](https://img.shields.io/pypi/l/pyls-spyder.svg)](https://raw.githubusercontent.com/spyder-ide/pyls-spyder/master/LICENSE)
+[![pypi version](https://img.shields.io/pypi/v/pyls-spyder.svg)](https://pypi.org/project/pyls-spyder/)
+[![conda version](https://img.shields.io/conda/vn/conda-forge/pyls-spyder.svg)](https://www.anaconda.com/download/)
+[![download count](https://img.shields.io/conda/dn/conda-forge/pyls-spyder.svg)](https://www.anaconda.com/download/)
+[![Downloads](https://pepy.tech/badge/pyls-spyder)](https://pepy.tech/project/pyls-spyder)
+[![PyPI status](https://img.shields.io/pypi/status/pyls-spyder.svg)](https://github.com/spyder-ide/pyls-spyder)
+![PyLS-Spyder tests](https://github.com/spyder-ide/pyls-spyder/workflows/PyLS-Spyder%20tests/badge.svg)
+
+*Copyright © 2020– Spyder Project Contributors*
+
+
+## Overview
+Spyder extensions for the [python-language-server](https://github.com/palantir/python-language-server) (pyls). This package provides Spyder-specific extras for the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/specifications/specification-current/) (LSP) on Python, such as document symbol searching and others.
+
+
+## Installing
+To install pyls-spyder, you can use both conda or pip package managers:
+
+```bash
+# Using conda (Recommended)
+conda install pyls-spyder -c spyder-ide
+
+# Using pip
+pip install pyls-spyder
+```
+
+## Dependencies
+This package depends on the [python-language-server](https://github.com/palantir/python-language-server) to integrate the Spyder-specific extensions.
+
+
+## Installing locally
+To install and develop spyder-pyls locally, you will need to install the python-language-server:
+
+```bash
+# Using conda
+conda install python-language-server
+
+# Using pip
+pip install python-language-server
+```
+
+Then, you can install the package locally using pip:
+
+```bash
+pip install -U -e .
+```
+
+## Running tests
+We use pytest to run tests as it follows:
+
+```bash
+pytest -x -v pyls_spyder/tests
+```
+
+## Extended LSP calls
+
+|          LSP method           |              Spyder extensions                   |
+|:-----------------------------:|:------------------------------------------------:|
+| `textDocument/documentSymbol` | Find code cells `# %%` and block comments `# --` |
+
+## Changelog
+Please see our [CHANGELOG](https://github.com/spyder-ide/three-merge/blob/master/CHANGELOG.md) file to learn more about our new features and improvements.
+
+
+## Contribution guidelines
+We follow PEP8 and PEP257 for all Python modules. We use MyPy type annotations for all functions and classes declared on this package. Feel free to send a PR or create an issue if you have any problem/question.
