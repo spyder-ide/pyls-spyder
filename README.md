@@ -60,6 +60,33 @@ pytest -x -v pyls_spyder/tests
 |:-----------------------------:|:------------------------------------------------:|
 | `textDocument/documentSymbol` | Find code cells `# %%` and block comments `# --` |
 
+## Plugin configuration options
+This plugin can be configured by using the key `pyls_spyder` when calling `workspace/didChangeConfiguration` on the pyls. Each configuration options is described below:
+
+<table>
+    <thead>
+        <tr>
+            <th>LSP method</th>
+            <th>Configuration Key</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=2>`textDocument/documentSymbol`</td>
+            <td>`group_cells`</td>
+            <td>bool</td>
+            <td>Enable/Disable code cell grouping according to the total number of leading percentages</td>
+        </tr>
+        <tr>
+            <td>`enable_block_comments`</td>
+            <td>bool</td>
+            <td>Enable/disable block comment detection</td>
+        </tr>
+    </tbody>
+</table>
+
 ## Changelog
 Please see our [CHANGELOG](https://github.com/spyder-ide/three-merge/blob/master/CHANGELOG.md) file to learn more about our new features and improvements.
 
