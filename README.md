@@ -61,7 +61,7 @@ pytest -x -v pyls_spyder/tests
 | `textDocument/documentSymbol` | Find code cells `# %%` and block comments `# --` |
 
 ## Plugin configuration options
-This plugin can be configured by using the key `pyls_spyder` when calling `workspace/didChangeConfiguration` on the pyls. Each configuration options is described below:
+This plugin can be configured by using the key `pyls_spyder` when calling `workspace/didChangeConfiguration` on the pyls. Each configuration option is described below:
 
 <table>
     <thead>
