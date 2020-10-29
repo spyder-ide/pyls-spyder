@@ -74,14 +74,14 @@ This plugin can be configured by using the key `pyls_spyder` when calling `works
     </thead>
     <tbody>
         <tr>
-            <td rowspan=2>`textDocument/documentSymbol`</td>
-            <td>`group_cells`</td>
-            <td>bool</td>
+            <td rowspan=2><code>textDocument/documentSymbol</code></td>
+            <td><code>group_cells</code></td>
+            <td><code>bool</code></td>
             <td>Enable/Disable code cell grouping according to the total number of leading percentages</td>
         </tr>
         <tr>
-            <td>`enable_block_comments`</td>
-            <td>bool</td>
+            <td><code>enable_block_comments</code></td>
+            <td><code>bool</code></td>
             <td>Enable/disable block comment detection</td>
         </tr>
     </tbody>
