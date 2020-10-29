@@ -58,6 +58,9 @@ def pyls_document_symbols(config: Config,
                           document: Document) -> List[Dict]:
     """Cell and block comment extraction."""
 
+    settings = config.plugin_settings('pyls_spyder')
+    group_cells = settings.get('group_cells', True)
+    enable_block_comments = settings.get('enable_block_comments', True)
     lines = document.lines
     cells = []
     blocks = []
@@ -80,17 +83,20 @@ def pyls_document_symbols(config: Config,
                 cell_name = 'Unnamed cell {0}'.format(unnamed_cell)
                 unnamed_cell += 1
 
-            if cell_level > current_level:
+            if not group_cells:
                 cell_stack.insert(0, (line_num, cell_level, cell_name))
             else:
-                while current_level >= cell_level:
-                    cell_stack.pop(0)
-                    cells.append(create_symbol(
-                        current_name, document, current_line, line_num))
-                    (current_line, current_level,
-                        current_name) = peek_symbol(cell_stack)
-                cell_stack.insert(0, (line_num, cell_level, cell_name))
-        elif block_match is not None:
+                if cell_level > current_level:
+                    cell_stack.insert(0, (line_num, cell_level, cell_name))
+                else:
+                    while current_level >= cell_level:
+                        cell_stack.pop(0)
+                        cells.append(create_symbol(
+                            current_name, document, current_line, line_num))
+                        (current_line, current_level,
+                            current_name) = peek_symbol(cell_stack)
+                    cell_stack.insert(0, (line_num, cell_level, cell_name))
+        elif block_match is not None and enable_block_comments:
             block_name = block_match.group(2).strip()
             if block_name == '':
                 block_name = 'Unnamed comment {0}'.format(unnamed_block)
