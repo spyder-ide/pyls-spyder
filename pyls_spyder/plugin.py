@@ -74,18 +74,20 @@ def pyls_document_symbols(config: Config,
         block_match = BLOCK_REGEX.match(line)
 
         if cell_match is not None:
-            current_line, current_level, current_name = peek_symbol(cell_stack)
             percentages = cell_match.group(1)
             cell_name = cell_match.group(2).strip()
-            cell_level = len(percentages) - 1
 
             if cell_name == '':
                 cell_name = 'Unnamed cell {0}'.format(unnamed_cell)
                 unnamed_cell += 1
 
             if not group_cells:
-                cell_stack.insert(0, (line_num, cell_level, cell_name))
+                cells.append(create_symbol(
+                    cell_name, document, line_num, line_num + 1))
             else:
+                current_line, current_level, current_name = peek_symbol(
+                    cell_stack)
+                cell_level = len(percentages) - 1
                 if cell_level > current_level:
                     cell_stack.insert(0, (line_num, cell_level, cell_name))
                 else:
