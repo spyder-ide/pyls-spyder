@@ -9,15 +9,14 @@
 """pyls-spyder misc utillites."""
 
 # Standard library imports
-import re
-from typing import Tuple, Optional, Dict
+from typing import Tuple, Dict
 
 
 class RegexEvaluator:
     def __init__(self, regex_map: Dict):
         self.regexes = regex_map
 
-    def match(self, string: str) -> Tuple[Optional[str], Optional[re.Match]]:
+    def match(self, string: str) -> Tuple:
         re_match = None
         re_rule = None
         for regex_name in self.regexes:
