@@ -14,7 +14,7 @@ from typing import Tuple, Optional, Dict
 
 
 class RegexEvaluator:
-    def __init__(self, regex_map: Dict[str, re.Pattern]):
+    def __init__(self, regex_map: Dict):
         self.regexes = regex_map
 
     def match(self, string: str) -> Tuple[Optional[str], Optional[re.Match]]:
