@@ -17,8 +17,30 @@ from pyls import hookimpl
 from pyls.config.config import Config
 from pyls.workspace import Workspace, Document
 
-CELL_REGEX = re.compile(r'^[\t ]*# (%%+)(.*)?$')
-BLOCK_REGEX = re.compile(r'^[\t ]*# (--+)(.*)?$')
+# Local imports
+from pyls_spyder.utils import RegexEvaluator
+
+# Code cell regular expressions
+CELL_PERCENTAGE, CELL_PERCENTAGE_REGEX = (
+    'CELL_PERCENTAGE', re.compile(r'^[\t ]*# ?(%%+)(.*)?$'))
+CELL_CODECELL, CELL_CODECELL_REGEX = (
+    'CELL_CODECELL', re.compile(r'^[\t ]*# ?(<codecell>)(.*)?$'))
+CELL_IN, CELL_IN_REGEX = (
+    'CELL_IN', re.compile(r'^[\t ]*# ?(In\[)([^\]\r\n]*)?\]?$'))
+
+CELL_REGEX = RegexEvaluator({
+    CELL_PERCENTAGE: CELL_PERCENTAGE_REGEX,
+    CELL_CODECELL: CELL_CODECELL_REGEX,
+    CELL_IN: CELL_IN_REGEX
+})
+
+# Block comment regular expressions
+BLOCK_DASH = (
+    'BLOCK_DASH', re.compile(r'^[\t ]*# ?-{4}([^-\n\r]?.*)?$'))
+BLOCK_HASH = (
+    'BLOCK_HASH', re.compile(r'^[\t ]*# ?#{3}([^\#\n\r]?.*)?$'))
+
+BLOCK_REGEX = RegexEvaluator(dict([BLOCK_DASH, BLOCK_HASH]))
 
 
 def peek_symbol(list: List) -> Tuple:
@@ -70,8 +92,8 @@ def pyls_document_symbols(config: Config,
     unnamed_block = 1
 
     for line_num, line in enumerate(lines):
-        cell_match = CELL_REGEX.match(line)
-        block_match = BLOCK_REGEX.match(line)
+        cell_rule, cell_match = CELL_REGEX.match(line)
+        block_rule, block_match = BLOCK_REGEX.match(line)
 
         if cell_match is not None:
             percentages = cell_match.group(1)
@@ -81,7 +103,7 @@ def pyls_document_symbols(config: Config,
                 cell_name = 'Unnamed cell {0}'.format(unnamed_cell)
                 unnamed_cell += 1
 
-            if not group_cells:
+            if not group_cells or cell_rule != CELL_PERCENTAGE:
                 cells.append(create_symbol(
                     cell_name, document, line_num, line_num + 1))
             else:
@@ -99,7 +121,7 @@ def pyls_document_symbols(config: Config,
                             current_name) = peek_symbol(cell_stack)
                     cell_stack.insert(0, (line_num, cell_level, cell_name))
         elif block_match is not None and enable_block_comments:
-            block_name = block_match.group(2).strip()
+            block_name = block_match.group(1).strip()
             if block_name == '':
                 block_name = 'Unnamed comment {0}'.format(unnamed_block)
                 unnamed_block += 1
