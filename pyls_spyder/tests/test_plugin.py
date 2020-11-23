@@ -8,9 +8,6 @@
 
 """pyls-spyder plugin tests."""
 
-# Standard library imports
-import os
-
 # PyLS imports
 from pyls import uris
 from pyls.workspace import Document
@@ -26,12 +23,14 @@ from pyls_spyder.plugin import pyls_document_symbols
 DOC_URI = uris.from_fs_path(__file__)
 DOC = """
 # %%
-# -- Imports
+# ---- Imports
 import os
 import sys
 
-# ------
+# <codecell> Other cell
+# ----
 def a():
+    #### Block comment on a
     # %%% Cell inside a
     for i in range(0, 10):
         # %%%% Cell
@@ -39,11 +38,14 @@ def a():
 
 # %%%
 def b():
-    # ----- Pass inside b
+    #---- Pass inside b
     pass
 
-# %% Empty cell
-# --
+# In[25]
+####
+
+#%% Empty cell
+#----
 """
 
 
@@ -61,15 +63,19 @@ def test_cell_block_symbols(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
     symbols = pyls_document_symbols(config, workspace, document)
     expected = [
-        ('Unnamed cell 1', 1, 17, 225),
+        ('Unnamed cell 1', 1, 22, 225),
         ('Imports', 2, 2, 224),
-        ('Unnamed comment 1', 6, 6, 224),
-        ('Cell inside a', 8, 12, 225),
-        ('Cell', 10, 12, 225),
-        ('Unnamed cell 2', 13, 17, 225),
-        ('Pass inside b', 15, 15, 224),
-        ('Empty cell', 18, 19, 225),
-        ('Unnamed comment 2', 19, 19, 224)
+        ('Other cell', 6, 6, 225),
+        ('Unnamed comment 1', 7, 7, 224),
+        ('Block comment on a', 9, 9, 224),
+        ('Cell inside a', 10, 14, 225),
+        ('Cell', 12, 14, 225),
+        ('Unnamed cell 2', 15, 22, 225),
+        ('Pass inside b', 17, 17, 224),
+        ('25', 20, 20, 225),
+        ('Unnamed comment 2', 21, 21, 224),
+        ('Empty cell', 23, 24, 225),
+        ('Unnamed comment 3', 24, 24, 224)
     ]
     test_results = []
     for symbol in symbols:
@@ -90,13 +96,17 @@ def test_ungroup_cell_symbols(config, workspace):
     expected = [
         ('Unnamed cell 1', 1, 1, 225),
         ('Imports', 2, 2, 224),
-        ('Unnamed comment 1', 6, 6, 224),
-        ('Cell inside a', 8, 8, 225),
-        ('Cell', 10, 10, 225),
-        ('Unnamed cell 2', 13, 13, 225),
-        ('Pass inside b', 15, 15, 224),
-        ('Empty cell', 18, 18, 225),
-        ('Unnamed comment 2', 19, 19, 224)
+        ('Other cell', 6, 6, 225),
+        ('Unnamed comment 1', 7, 7, 224),
+        ('Block comment on a', 9, 9, 224),
+        ('Cell inside a', 10, 10, 225),
+        ('Cell', 12, 12, 225),
+        ('Unnamed cell 2', 15, 15, 225),
+        ('Pass inside b', 17, 17, 224),
+        ('25', 20, 20, 225),
+        ('Unnamed comment 2', 21, 21, 224),
+        ('Empty cell', 23, 23, 225),
+        ('Unnamed comment 3', 24, 24, 224)
     ]
     test_results = []
     for symbol in symbols:
@@ -115,11 +125,13 @@ def test_disable_block_comments(config, workspace):
     config.plugin_settings = lambda _: {'enable_block_comments': False}
     symbols = pyls_document_symbols(config, workspace, document)
     expected = [
-        ('Unnamed cell 1', 1, 17, 225),
-        ('Cell inside a', 8, 12, 225),
-        ('Cell', 10, 12, 225),
-        ('Unnamed cell 2', 13, 17, 225),
-        ('Empty cell', 18, 19, 225)
+        ('Unnamed cell 1', 1, 22, 225),
+        ('Other cell', 6, 6, 225),
+        ('Cell inside a', 10, 14, 225),
+        ('Cell', 12, 14, 225),
+        ('Unnamed cell 2', 15, 22, 225),
+        ('25', 20, 20, 225),
+        ('Empty cell', 23, 24, 225)
     ]
     test_results = []
     for symbol in symbols:
