@@ -44,7 +44,7 @@ def b():
 # In[25]
 ####
 
-# %% Empty cell
+#%% Empty cell
 #----
 """
 
