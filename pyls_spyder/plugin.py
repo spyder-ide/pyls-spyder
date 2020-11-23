@@ -135,3 +135,16 @@ def pyls_document_symbols(config: Config,
     spyder_symbols = sorted(
         spyder_symbols, key=lambda x: x['location']['range']['start']['line'])
     return spyder_symbols
+
+
+@hookimpl
+def pyls_folding_range(
+        config: Config,
+        workspace: Workspace,
+        document: Document) -> List[Dict]:
+    lines = document.lines
+    cell_stack = []
+    for line_num, line in enumerate(lines):
+        cell_rule, cell_match = CELL_REGEX.match(line)
+        if cell_match is not None:
+            percentages = cell_match.group(1)
