@@ -21,10 +21,13 @@ from pyls.workspace import Workspace, Document
 from pyls_spyder.utils import RegexEvaluator
 
 # Code cell regular expressions
+# 1. Cells declared with percentages, i.e., # %% Cell
 CELL_PERCENTAGE, CELL_PERCENTAGE_REGEX = (
     'CELL_PERCENTAGE', re.compile(r'^[\t ]*# ?(%%+)(.*)?$'))
+# 2. Cells declared with "<codecell>", i.e., # <codecell>
 CELL_CODECELL, CELL_CODECELL_REGEX = (
     'CELL_CODECELL', re.compile(r'^[\t ]*# ?(<codecell>)(.*)?$'))
+# 3. Cells declared with "In[.*], i.e., # In[23]"
 CELL_IN, CELL_IN_REGEX = (
     'CELL_IN', re.compile(r'^[\t ]*# ?(In\[)([^\]\r\n]*)?\]?$'))
 
@@ -35,10 +38,12 @@ CELL_REGEX = RegexEvaluator({
 })
 
 # Block comment regular expressions
+# 1. Block comments declared with 4 dashes, i.e., # ---- Block comment
 BLOCK_DASH = (
     'BLOCK_DASH', re.compile(r'^[\t ]*# ?-{4}([^-\n\r]?.*)?$'))
+# 2. Block comments declared with 3 consecutive hashes, i.e., #### Comment
 BLOCK_HASH = (
-    'BLOCK_HASH', re.compile(r'^[\t ]*# ?#{3}([^\#\n\r]?.*)?$'))
+    'BLOCK_HASH', re.compile(r'^[\t ]*##{3}([^\#\n\r]?.*)?$'))
 
 BLOCK_REGEX = RegexEvaluator(dict([BLOCK_DASH, BLOCK_HASH]))
 
