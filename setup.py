@@ -52,6 +52,7 @@ setup(
     long_description=get_description(),
     long_description_content_type='text/markdown',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
+    python_requires='>= 3.6',
     install_requires=REQUIREMENTS,
     include_package_data=True,
     entry_points={"pyls": ["pyls_spyder = pyls_spyder.plugin"]},
