@@ -1,3 +1,20 @@
+## Version 0.2.1 (2020/11/24)
+
+### Issues Closed
+
+* [Issue 14](https://github.com/spyder-ide/pyls-spyder/issues/14) - Release v0.2.1
+
+In this release 1 issue was closed.
+
+### Pull Requests Merged
+
+* [PR 13](https://github.com/spyder-ide/pyls-spyder/pull/13) - PR: Pin minimum Python version to 3.6, by [@andfoy](https://github.com/andfoy)
+
+In this release 1 pull request was closed.
+
+###############################################################################
+
+
 ## Version 0.2.0 (2020/11/23)
 
 ### Issues Closed
