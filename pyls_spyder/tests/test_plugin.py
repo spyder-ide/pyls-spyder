@@ -14,7 +14,7 @@ from pyls.workspace import Document
 
 # pytest imports
 import pytest
-from mock import MagicMock
+from unittest.mock import MagicMock
 
 # Local imports
 from pyls_spyder.plugin import pyls_document_symbols
@@ -44,7 +44,7 @@ def b():
 # In[25]
 ####
 
-# %% Empty cell
+#%% Empty cell
 #----
 """
 
