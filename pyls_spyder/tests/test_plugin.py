@@ -17,7 +17,7 @@ import pytest
 from unittest.mock import MagicMock
 
 # Local imports
-from pyls_spyder.plugin import pyls_document_symbols
+from pyls_spyder.plugin import pyls_document_symbols, pyls_folding_range
 
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -142,4 +142,24 @@ def test_disable_block_comments(config, workspace):
         end = sym_range['end']['line']
         kind = symbol['kind']
         test_results.append((name, start, end, kind))
+    assert expected == test_results
+
+
+def test_cell_folding_regions(config, workspace):
+    document = Document(DOC_URI, workspace, DOC)
+    regions = pyls_folding_range(config, workspace, document)
+    expected = [
+        (1, 23),
+        (6, 10),
+        (10, 15),
+        (12, 15),
+        (15, 23),
+        (20, 23),
+        (23, 25)
+    ]
+    test_results = []
+    for region in regions:
+        start = region['startLine']
+        end = region['endLine']
+        test_results.append((start, end))
     assert expected == test_results
