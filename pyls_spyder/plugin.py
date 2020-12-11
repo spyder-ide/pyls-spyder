@@ -79,6 +79,13 @@ def create_symbol(name: str, document: Document,
         }
 
 
+def create_fold_region(start_line: int, end_line: int):
+    return {
+        'startLine': start_line,
+        'endLine': end_line,
+    }
+
+
 @hookimpl
 def pyls_document_symbols(config: Config,
                           workspace: Workspace,
@@ -140,3 +147,34 @@ def pyls_document_symbols(config: Config,
     spyder_symbols = sorted(
         spyder_symbols, key=lambda x: x['location']['range']['start']['line'])
     return spyder_symbols
+
+
+@hookimpl
+def pyls_folding_range(
+        config: Config,
+        workspace: Workspace,
+        document: Document) -> List[Dict]:
+    lines = document.lines
+    cell_stack = []
+    cells = []
+    for line_num, line in enumerate(lines):
+        cell_rule, cell_match = CELL_REGEX.match(line)
+        if cell_match is not None:
+            percentages = cell_match.group(1)
+            current_line, current_level, _ = peek_symbol(cell_stack)
+            if cell_rule != CELL_PERCENTAGE:
+                cell_level = current_level + 1
+            else:
+                cell_level = len(percentages) - 1
+            if cell_level > current_level:
+                cell_stack.insert(0, (line_num, cell_level, ''))
+            else:
+                while current_level >= cell_level:
+                    cell_stack.pop(0)
+                    cells.append(create_fold_region(current_line, line_num))
+                    current_line, current_level, _ = peek_symbol(cell_stack)
+                cell_stack.insert(0, (line_num, cell_level, ''))
+    for line, _, name in cell_stack:
+        cells.append(create_fold_region(line, line_num + 1))
+    cells = sorted(cells, key=lambda x: x['startLine'])
+    return cells

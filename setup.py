@@ -38,7 +38,7 @@ def get_description():
     return data
 
 
-REQUIREMENTS = ['python-language-server']
+REQUIREMENTS = ['python-language-server >= 0.36.2']
 
 setup(
     name='pyls-spyder',

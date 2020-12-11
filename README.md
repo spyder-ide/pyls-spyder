@@ -59,6 +59,7 @@ pytest -x -v pyls_spyder/tests
 |          LSP method           |              Spyder extensions                   |
 |:-----------------------------:|:------------------------------------------------:|
 | `textDocument/documentSymbol` | Find code cells `# %%` and block comments `# --` |
+| `textDocument/foldingRange`   | Return code cells `# %%` as code folding regions |
 
 ## Plugin configuration options
 This plugin can be configured by using the key `pyls_spyder` when calling `workspace/didChangeConfiguration` on the pyls. Each configuration option is described below:
