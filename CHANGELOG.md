@@ -1,3 +1,18 @@
+## Version 0.3.0 (2020/12/11)
+
+### Issues Closed
+
+* [Issue 16](https://github.com/spyder-ide/pyls-spyder/issues/16) - Release v0.3.0
+
+In this release 1 issue was closed.
+
+### Pull Requests Merged
+
+* [PR 15](https://github.com/spyder-ide/pyls-spyder/pull/15) - PR: Add support for textDocument/foldingRange call for code cells, by [@andfoy](https://github.com/andfoy) ([7846](https://github.com/spyder-ide/spyder/issues/7846))
+
+In this release 1 pull request was closed.
+
+
 ## Version 0.2.1 (2020/11/24)
 
 ### Issues Closed
