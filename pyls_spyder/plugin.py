@@ -171,10 +171,10 @@ def pyls_folding_range(
             else:
                 while current_level >= cell_level:
                     cell_stack.pop(0)
-                    cells.append(create_fold_region(current_line, line_num))
+                    cells.append(create_fold_region(current_line, line_num - 1))
                     current_line, current_level, _ = peek_symbol(cell_stack)
                 cell_stack.insert(0, (line_num, cell_level, ''))
     for line, _, name in cell_stack:
-        cells.append(create_fold_region(line, line_num + 1))
+        cells.append(create_fold_region(line, line_num))
     cells = sorted(cells, key=lambda x: x['startLine'])
     return cells
