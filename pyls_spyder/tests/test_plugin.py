@@ -149,13 +149,13 @@ def test_cell_folding_regions(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
     regions = pyls_folding_range(config, workspace, document)
     expected = [
-        (1, 23),
-        (6, 10),
-        (10, 15),
-        (12, 15),
-        (15, 23),
-        (20, 23),
-        (23, 25)
+        (1, 22),
+        (6, 9),
+        (10, 14),
+        (12, 14),
+        (15, 22),
+        (20, 22),
+        (23, 24)
     ]
     test_results = []
     for region in regions:
