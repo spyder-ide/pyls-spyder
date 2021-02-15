@@ -1,3 +1,18 @@
+## Version 0.3.1 (2021-02-15)
+
+### Issues Closed
+
+* [Issue 19](https://github.com/spyder-ide/pyls-spyder/issues/19) - Release v0.3.1
+
+In this release 1 issue was closed.
+
+### Pull Requests Merged
+
+* [PR 18](https://github.com/spyder-ide/pyls-spyder/pull/18) - PR: Fix code folding of cells, by [@remisalmon](https://github.com/remisalmon) ([14730](https://github.com/spyder-ide/spyder/issues/14730))
+
+In this release 1 pull request was closed.
+
+
 ## Version 0.3.0 (2020/12/11)
 
 ### Issues Closed
