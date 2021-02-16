@@ -1,3 +1,19 @@
+## Version 0.3.2 (2021-02-16)
+
+### Issues Closed
+
+* [Issue 22](https://github.com/spyder-ide/pyls-spyder/issues/22) - Release v0.3.2
+* [Issue 20](https://github.com/spyder-ide/pyls-spyder/issues/20) - Fix code blocks regular expression ([PR 21](https://github.com/spyder-ide/pyls-spyder/pull/21) by [@andfoy](https://github.com/andfoy))
+
+In this release 2 issues were closed.
+
+### Pull Requests Merged
+
+* [PR 21](https://github.com/spyder-ide/pyls-spyder/pull/21) - PR: Ensure that block comments start by 4 dashes or number signs, by [@andfoy](https://github.com/andfoy) ([20](https://github.com/spyder-ide/pyls-spyder/issues/20))
+
+In this release 1 pull request was closed.
+
+
 ## Version 0.3.1 (2021-02-15)
 
 ### Issues Closed
