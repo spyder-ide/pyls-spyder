@@ -40,10 +40,10 @@ CELL_REGEX = RegexEvaluator({
 # Block comment regular expressions
 # 1. Block comments declared with 4 dashes, i.e., # ---- Block comment
 BLOCK_DASH = (
-    'BLOCK_DASH', re.compile(r'^[\t ]*# ?-{4}([^-\n\r]?.*)?$'))
+    'BLOCK_DASH', re.compile(r'^[\t ]*# ?-{4}([^-\n\r].*)?$'))
 # 2. Block comments declared with 3 consecutive hashes, i.e., #### Comment
 BLOCK_HASH = (
-    'BLOCK_HASH', re.compile(r'^[\t ]*##{3}([^\#\n\r]?.*)?$'))
+    'BLOCK_HASH', re.compile(r'^[\t ]*##{3}([^\#\n\r].*)?$'))
 
 BLOCK_REGEX = RegexEvaluator(dict([BLOCK_DASH, BLOCK_HASH]))
 
@@ -133,7 +133,12 @@ def pyls_document_symbols(config: Config,
                             current_name) = peek_symbol(cell_stack)
                     cell_stack.insert(0, (line_num, cell_level, cell_name))
         elif block_match is not None and enable_block_comments:
-            block_name = block_match.group(1).strip()
+            block_name = block_match.group(1)
+            if block_name is None:
+                block_name = ''
+            else:
+                block_name = block_name.strip()
+
             if block_name == '':
                 block_name = 'Unnamed comment {0}'.format(unnamed_block)
                 unnamed_block += 1
