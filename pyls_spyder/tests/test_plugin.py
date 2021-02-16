@@ -44,8 +44,11 @@ def b():
 # In[25]
 ####
 
-#%% Empty cell
+#%% Invalid comments
 #----
+# ---------- This should not work
+###### This either
+#%% Empty cell
 """
 
 
@@ -74,8 +77,9 @@ def test_cell_block_symbols(config, workspace):
         ('Pass inside b', 17, 17, 224),
         ('25', 20, 20, 225),
         ('Unnamed comment 2', 21, 21, 224),
-        ('Empty cell', 23, 24, 225),
-        ('Unnamed comment 3', 24, 24, 224)
+        ('Invalid comments', 23, 26, 225),
+        ('Unnamed comment 3', 24, 24, 224),
+        ('Empty cell', 27, 27, 225)
     ]
     test_results = []
     for symbol in symbols:
@@ -105,8 +109,9 @@ def test_ungroup_cell_symbols(config, workspace):
         ('Pass inside b', 17, 17, 224),
         ('25', 20, 20, 225),
         ('Unnamed comment 2', 21, 21, 224),
-        ('Empty cell', 23, 23, 225),
-        ('Unnamed comment 3', 24, 24, 224)
+        ('Invalid comments', 23, 23, 225),
+        ('Unnamed comment 3', 24, 24, 224),
+        ('Empty cell', 27, 27, 225)
     ]
     test_results = []
     for symbol in symbols:
@@ -131,7 +136,8 @@ def test_disable_block_comments(config, workspace):
         ('Cell', 12, 14, 225),
         ('Unnamed cell 2', 15, 22, 225),
         ('25', 20, 20, 225),
-        ('Empty cell', 23, 24, 225)
+        ('Invalid comments', 23, 26, 225),
+        ('Empty cell', 27, 27, 225)
     ]
     test_results = []
     for symbol in symbols:
@@ -155,7 +161,8 @@ def test_cell_folding_regions(config, workspace):
         (12, 14),
         (15, 22),
         (20, 22),
-        (23, 24)
+        (23, 26),
+        (27, 27)
     ]
     test_results = []
     for region in regions:
