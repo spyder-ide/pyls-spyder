@@ -18,7 +18,7 @@ from pylsp.config.config import Config
 from pylsp.workspace import Workspace, Document
 
 # Local imports
-from pylsp_spyder.utils import RegexEvaluator
+from pyls_spyder.utils import RegexEvaluator
 
 # Code cell regular expressions
 # 1. Cells declared with percentages, i.e., # %% Cell
