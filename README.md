@@ -12,7 +12,7 @@
 
 
 ## Overview
-Spyder extensions for the [python-language-server](https://github.com/palantir/python-language-server) (pyls). This package provides Spyder-specific extras for the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/specifications/specification-current/) (LSP) on Python, such as document symbol searching and others.
+Spyder extensions for the [python-lsp-server](https://github.com/python-lsp/python-lsp-server) (pylsp). This package provides Spyder-specific extras for the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/specifications/specification-current/) (LSP) on Python, such as document symbol searching and others.
 
 
 ## Installing
@@ -27,18 +27,18 @@ pip install pyls-spyder
 ```
 
 ## Dependencies
-This package depends on the [python-language-server](https://github.com/palantir/python-language-server) to integrate the Spyder-specific extensions.
+This package depends on the [python-lsp-server](https://github.com/python-lsp/python-lsp-server) to integrate the Spyder-specific extensions.
 
 
 ## Installing locally
-To install and develop spyder-pyls locally, you will need to install the python-language-server:
+To install and develop spyder-pyls locally, you will need to install the python-lsp-server:
 
 ```bash
 # Using conda
-conda install python-language-server
+conda install python-lsp-server
 
 # Using pip
-pip install python-language-server
+pip install python-lsp-server
 ```
 
 Then, you can install the package locally using pip:
@@ -89,7 +89,7 @@ This plugin can be configured by using the key `pyls_spyder` when calling `works
 </table>
 
 ## Changelog
-Please see our [CHANGELOG](https://github.com/spyder-ide/three-merge/blob/master/CHANGELOG.md) file to learn more about our new features and improvements.
+Please see our [CHANGELOG](https://github.com/spyder-ide/pyls-spyder/blob/master/CHANGELOG.md) file to learn more about our new features and improvements.
 
 
 ## Contribution guidelines

@@ -9,15 +9,15 @@
 """pyls-spyder plugin tests."""
 
 # PyLS imports
-from pyls import uris
-from pyls.workspace import Document
+from pylsp import uris
+from pylsp.workspace import Document
 
 # pytest imports
 import pytest
 from unittest.mock import MagicMock
 
 # Local imports
-from pyls_spyder.plugin import pyls_document_symbols, pyls_folding_range
+from pyls_spyder.plugin import pylsp_document_symbols, pylsp_folding_range
 
 
 DOC_URI = uris.from_fs_path(__file__)
@@ -64,7 +64,7 @@ def config():
 
 def test_cell_block_symbols(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
-    symbols = pyls_document_symbols(config, workspace, document)
+    symbols = pylsp_document_symbols(config, workspace, document)
     expected = [
         ('Unnamed cell 1', 1, 22, 225),
         ('Imports', 2, 2, 224),
@@ -96,7 +96,7 @@ def test_cell_block_symbols(config, workspace):
 def test_ungroup_cell_symbols(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
     config.plugin_settings = lambda _: {'group_cells': False}
-    symbols = pyls_document_symbols(config, workspace, document)
+    symbols = pylsp_document_symbols(config, workspace, document)
     expected = [
         ('Unnamed cell 1', 1, 1, 225),
         ('Imports', 2, 2, 224),
@@ -128,7 +128,7 @@ def test_ungroup_cell_symbols(config, workspace):
 def test_disable_block_comments(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
     config.plugin_settings = lambda _: {'enable_block_comments': False}
-    symbols = pyls_document_symbols(config, workspace, document)
+    symbols = pylsp_document_symbols(config, workspace, document)
     expected = [
         ('Unnamed cell 1', 1, 22, 225),
         ('Other cell', 6, 6, 225),
@@ -153,7 +153,7 @@ def test_disable_block_comments(config, workspace):
 
 def test_cell_folding_regions(config, workspace):
     document = Document(DOC_URI, workspace, DOC)
-    regions = pyls_folding_range(config, workspace, document)
+    regions = pylsp_folding_range(config, workspace, document)
     expected = [
         (1, 22),
         (6, 9),

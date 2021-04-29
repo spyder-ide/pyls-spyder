@@ -38,24 +38,24 @@ def get_description():
     return data
 
 
-REQUIREMENTS = ['python-language-server >= 0.36.2']
+REQUIREMENTS = ['python-lsp-server >= 1.0.1']
 
 setup(
     name='pyls-spyder',
     version=get_version(),
-    keywords=['PyLS', 'Plugin'],
+    keywords=['PyLSP', 'Plugin'],
     url='https://github.com/spyder-ide/pyls-spyder',
     license='MIT',
     author='Spyder Project Contributors',
     author_email='spyder.python@gmail.com',
-    description='Spyder extensions for the python-language-server',
+    description='Spyder extensions for the python-lsp-server',
     long_description=get_description(),
     long_description_content_type='text/markdown',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     python_requires='>= 3.6',
     install_requires=REQUIREMENTS,
     include_package_data=True,
-    entry_points={"pyls": ["pyls_spyder = pyls_spyder.plugin"]},
+    entry_points={"pylsp": ["pyls_spyder = pyls_spyder.plugin"]},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
