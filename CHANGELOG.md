@@ -1,3 +1,19 @@
+## Version 0.4.0 (2021/04/29)
+
+### Issues Closed
+
+* [Issue 26](https://github.com/spyder-ide/pyls-spyder/issues/26) - Release v0.4.0
+* [Issue 24](https://github.com/spyder-ide/pyls-spyder/issues/24) - Update dependencies to use python-lsp-server instead of python-language-server ([PR 25](https://github.com/spyder-ide/pyls-spyder/pull/25) by [@andfoy](https://github.com/andfoy))
+
+In this release 2 issues were closed.
+
+### Pull Requests Merged
+
+* [PR 25](https://github.com/spyder-ide/pyls-spyder/pull/25) - PR: Use python-lsp-server instead of python-language-server, by [@andfoy](https://github.com/andfoy) ([24](https://github.com/spyder-ide/pyls-spyder/issues/24))
+
+In this release 1 pull request was closed.
+
+
 ## Version 0.3.2 (2021-02-16)
 
 ### Issues Closed
