@@ -13,9 +13,9 @@ import re
 from typing import List, Dict, Tuple
 
 # PyLS imports
-from pyls import hookimpl
-from pyls.config.config import Config
-from pyls.workspace import Workspace, Document
+from pylsp import hookimpl
+from pylsp.config.config import Config
+from pylsp.workspace import Workspace, Document
 
 # Local imports
 from pyls_spyder.utils import RegexEvaluator
@@ -87,7 +87,7 @@ def create_fold_region(start_line: int, end_line: int):
 
 
 @hookimpl
-def pyls_document_symbols(config: Config,
+def pylsp_document_symbols(config: Config,
                           workspace: Workspace,
                           document: Document) -> List[Dict]:
     """Cell and block comment extraction."""
@@ -155,7 +155,7 @@ def pyls_document_symbols(config: Config,
 
 
 @hookimpl
-def pyls_folding_range(
+def pylsp_folding_range(
         config: Config,
         workspace: Workspace,
         document: Document) -> List[Dict]:
